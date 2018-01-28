@@ -75,10 +75,7 @@ app.use(cookieSession({
     //sess.emailAddress;
     //sess.userName;
   //});
-
-var port = 8081;
-app.listen(port);
-
+ 
 //Variables for EJS
 var User= " ";
 var alert= 0;
