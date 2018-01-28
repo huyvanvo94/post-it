@@ -55,9 +55,7 @@ const multipartMiddleware = multipart();
 
 // Create the app.
 var app = express();
-
-var port = process.env.PORT || 5000;
-
+ 
 app.use(cookieSession({
     secret: 'post-it',
     name: 'session',
@@ -153,7 +151,8 @@ var Storage = multer.diskStorage({
 
 
 const upload = multer({ storage: Storage, limits: { fileSize: "100mb"}}).array("imgUploader", 3);
+app.set('port', (process.env.PORT || 5000));
 
-app.listen(port, function() {
-    console.log('Our app is running on http://localhost:' + port);
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });

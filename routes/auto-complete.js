@@ -6,7 +6,7 @@ router.get('/',
 	function (req, res) {
 		console.log('auto-complete');
 
-		let keyword = req.param("suggested");
+		var keyword = req.param("suggested");
 		// tester
 		var source = [
             "T-Shirt",
