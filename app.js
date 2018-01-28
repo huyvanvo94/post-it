@@ -56,6 +56,8 @@ const multipartMiddleware = multipart();
 // Create the app.
 var app = express();
 
+var port = process.env.PORT || 8080;
+
 app.use(cookieSession({
     secret: 'post-it',
     name: 'session',
@@ -65,18 +67,7 @@ app.use(cookieSession({
 }));
 
 
-
-//var sess;
-//app.get('/',function(req,res){
-  //  sess=req.session;
-    //sess.firstName;
-    //sess.lastName;
-    //sess.studentId;
-    //sess.emailAddress;
-    //sess.userName;
-  //});
  
-//Variables for EJS
 var User= " ";
 var alert= 0;
 var credential= 0;
@@ -162,3 +153,7 @@ var Storage = multer.diskStorage({
 
 
 const upload = multer({ storage: Storage, limits: { fileSize: "100mb"}}).array("imgUploader", 3);
+
+app.listen(port, function() {
+    console.log('Our app is running on http://localhost:' + port);
+});
