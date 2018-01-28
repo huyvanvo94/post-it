@@ -10,8 +10,8 @@ var userCode;
 router.post('/',
 	function (req, res){
 		console.log("validate-code");
-		let code = req.param("code");
-		let userId = req.param("_id");
+		var code = req.param("code");
+		var userId = req.param("_id");
 		sess = req.session;
 		var db = req.db;
 
@@ -20,13 +20,13 @@ router.post('/',
 
 		console.log('student id on validate code page is ' + studentId);
 
-		let collection = db.get("users");
+		var collection = db.get("users");
 
 		collection.findOne({"studentId": studentId}, function (e, docs){
 			// should only return one!
-			let user = docs;
+			var user = docs;
 			userCode = user.validation_code;
-			let userId =  user._id.toString();
+			var userId =  user._id.toString();
 
 			if(code === userCode){
 				collection.update({_id: userId}, {$set: {validated: true}}, function (err,docs) {
