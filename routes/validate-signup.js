@@ -29,7 +29,7 @@ router.post('/',
 
 		var code = handle.generateCode();
 		userCode = code;
-		let userJSON = {
+		var userJSON = {
 			"firstName": firstName,
 			"lastName": lastName,
 			"studentId": studentId,
@@ -41,13 +41,13 @@ router.post('/',
 		};
 
 		var db = req.db;
-		let collection = db.get("users");
+		var collection = db.get("users");
 
 		console.log('db is '+ db);
 		console.log('collection is ' +collection);
 
 
-		let searchUser = {
+		var searchUser = {
             "userName": userName,
             "emailAddress": emailAddress,
             "studentId": studentId

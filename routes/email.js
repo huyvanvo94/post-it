@@ -6,9 +6,9 @@ router.get('/',
     function(req, res)
     {
         console.log("email requested");
-        let id = req.param('id');
-        let db = req.db;
-        let collection = db.get("users");
+        var id = req.param('id');
+        var db = req.db;
+        var collection = db.get("users");
 
         collection.findOne({"_id": id}, function (err, docs) {
             if(err){

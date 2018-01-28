@@ -5,7 +5,7 @@ router.get("/", function (req, res) {
 
     console.log("create-post.html");
 
-    let userId = req.cookies.userId;
+    var userId = req.cookies.userId;
 
     if (userId) {
 

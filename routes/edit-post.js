@@ -5,7 +5,7 @@ router.post('/', function (req, res) {
 	console.log("edit post");
 
 	var db = req.db;
-	let collection = db.get("posts");
+	var collection = db.get("posts");
 
 	var post = req.param("post");
 

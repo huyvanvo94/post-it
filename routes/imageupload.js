@@ -15,7 +15,7 @@ var db = monk("mongodb://"+"PostIt"+":"+"postit1"+"@ds235065.mlab.com:35065/post
 var file_name = [];
 var counter = 0;
 
-let pathParams, image, imageName;
+var pathParams, image, imageName;
 
 /** Load Config File */
 AWS.config.loadFromPath('config.json');
