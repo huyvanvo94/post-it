@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="../js/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css">
+    <script src="../js/jquery-ui.min.js"></script>
+
+    <script src="../util/response.js"></script>
+    <script src="../util/post.js"></script>
+	<link rel="stylesheet" type="text/css" href="selling-post.css">
+	<script>
+
+		var count = 1;
+
+        $(document).ready(function () {
+            var ignoreDrag = function(e) {
+                var event = typeof e.originalEvent != 'undefined' ? e.originalEvent : e;
+                if (event.stopPropagation) {
+                    event.stopPropagation();
+                }
+                if (event.preventDefault) {
+                    event.preventDefault();
+                }
+            };
+            $("#holder").bind('dragover', ignoreDrag).bind('dragenter', ignoreDrag).bind('drop', function(e){
+                var holder = this;
+                e = (e&&e.originalEvent?e.originalEvent:window.event) || e;
+                ignoreDrag(e);
+                var files = (e.files||e.dataTransfer.files);
+                var s = "";
+                for (var i = 0; i < files.length; i++) {
+                    (function(i){
+                        var reader = new FileReader();
+
+                        reader.onload = function (event) {
+                            if(count > 3){
+                                alert("Images limit is 3!");
+                                return;
+							}
+
+                            let img = $("<img/>");
+                            img.attr('id', 'img'+count);
+                            img.attr("src", event.target.result);
+                            $("#photo-holder").append(img);
+
+							$("#img-"+count).val(event.target.result);
+							count += 1;
+
+                        };
+                        reader.readAsDataURL(files[i]);
+                    })(i);
+                }
+
+                return false;
+            });
+            
+
+        });
+        function validateForm() {
+        	
+
+            var price = $("#price").val();
+            if (!price.match(/^\d+$/)){
+                alert("Price should only contain numbers.");
+                return false;
+            }
+            var city = $("#city").val();
+            if (city.match(/\d/)) {
+                alert("City cannot contain numbers.");
+                return false;
+            }
+            var zip = $("#zip").val();
+            if (!zip.match(/^\d+$/)){
+                alert("Zip should only contain numbers.");
+                return false;
+            }
+            var state = $("#state").val();
+            if (state.match(/\d/)) {
+                alert("State cannot contain numbers.");
+                return false
+            }
+            
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+<div id="nav">
+        <div id="nav-wrapper">
+            <ul>
+                <li><a href="/">Home</a></li>                
+            </ul>
+        </div>
+</div>
+
+
+<div id = "formdiv">
+	<form id="upload" method="post" action= "/add-post-renting" onsubmit="return validateForm();">
+	    <label for="title">Product Name</label>
+
+	    <input placeholder="Title" type="text" id="title" name="title" required>
+	    <br/>
+		<label for="about">Product Description</label>
+		<textarea id="about" name="about" placeholder="Enter your description" required></textarea>
+		<br/>
+		<input value="rent" type="text" name="type" id="category" style="display: none;">
+		<br>
+		<label for="price">Price in $</label>
+		<input id="price" name="price" type="text" maxlength="20"  value=0>
+		<br>
+        <label >Location</label><br>
+        <div class="inline">
+	        <div class="add">Street<input id="street" name="street" type="text" maxlength="20" placeholder="Address" required></div>
+	        <div class="add">City<input id="city" name="city" type="text" maxlength="20" placeholder="City" required></div>
+	        <div class="add">Zip<input id="zip" name="zip" type="text" maxlength="20" placeholder="Zipcode" required></div>
+	        <div class="add">State<input id="state" name="state" type="text" maxlength="20" placeholder="State" required></div>
+		</div>
+
+        <br>
+		<label>Product Images</label>
+		<br/>
+		<ul id="photo-holder">
+			<div id="holder">
+				<p>Drag Here</p>
+			</div>
+		</ul>
+
+
+		<input name="img-1" id="img-1" style="display: none;">
+		<input name="img-2" id="img-2" style="display: none;">
+		<input name="img-3" id="img-3" style="display: none;">
+
+		<!--input type="file" name="file" id="file" multiple--><br/>
+		<button type="submit">Post</button>
+	</form>
+</div> 
+</body>
+</html>
