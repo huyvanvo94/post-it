@@ -9,3 +9,5 @@ The host for this project is <b>Heroku </b>
 
 The current URL for this project: <a href ="https://herokue124.herokuapp.com/"> https://herokue124.herokuapp.com/ </a>
 </p>
+
+<img src="home.png">
